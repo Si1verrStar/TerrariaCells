@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 
@@ -22,7 +23,7 @@ namespace TerrariaCells.Common.GlobalItems;
 ///
 /// This portion contains the logic of the modifier system, use this when adding new modifier types.
 /// </summary>
-public partial class FunkyModifierItemModifier : GlobalItem
+public partial class FunkyModifierItemModifier : GlobalItem, TooltipBuilder.IGlobal, TooltipFilter.IGlobal
 {
     public override bool InstancePerEntity => true;
 
@@ -426,6 +427,29 @@ public partial class FunkyModifierItemModifier : GlobalItem
             modifiers = Array.Empty<FunkyModifier>();
         }
     }
+
+    public override void Load()
+    {
+        ItemTooltips.InsertTooltip("FunkyModifier0", "OneDropLogo");
+        ItemTooltips.InsertTooltip("FunkyModifier1", "FunkyModifier0");
+        ItemTooltips.InsertTooltip("FunkyModifier2", "FunkyModifier1");
+        ItemTooltips.InsertTooltip("FunkyModifier3", "FunkyModifier2");
+        ItemTooltips.InsertTooltip("FunkyModifier4", "FunkyModifier3");
+        ItemTooltips.InsertTooltip("FunkyModifier5", "FunkyModifier4");
+        FunkyModifier.LoadLocalization(Mod);
+    }
+    public void GetFilters(Item item, out string[] whitelist, out string[] blacklist)
+    {
+        whitelist = new string[] { "FunkyModifier0", "FunkyModifier1", "FunkyModifier2", "FunkyModifier3", "FunkyModifier4", "FunkyModifier5" };
+        blacklist = Array.Empty<string>();
+    }
+    public string BuildTooltip(Item item, string Tooltip)
+    {
+        if (!Tooltip.StartsWith("FunkyModifier")) return null;
+        if (!int.TryParse(Tooltip[..^1], out int id)) return null;
+        if (id < 0 || id >= modifiers.Length) return null;
+        return modifiers[id].ToString();
+    }
 }
 
 public partial class ProjectileFunker : GlobalProjectile
@@ -518,11 +542,11 @@ public partial class ProjectileFunker : GlobalProjectile
             switch (funkyModifier.modifierType)
             {
                 case FunkyModifierType.ApplyDebuff:
-                {
-                    //target.AddBuff(funkyModifier.id, (int)funkyModifier.modifier);
-					GlobalNPCs.BuffNPC.AddBuff(target, funkyModifier.id, (int)funkyModifier.modifier, damageDone);
-                    break;
-                }
+                    {
+                        //target.AddBuff(funkyModifier.id, (int)funkyModifier.modifier);
+                        GlobalNPCs.BuffNPC.AddBuff(target, funkyModifier.id, (int)funkyModifier.modifier, damageDone);
+                        break;
+                    }
             }
         }
     }
