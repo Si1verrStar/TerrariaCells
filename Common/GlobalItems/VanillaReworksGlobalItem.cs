@@ -226,7 +226,7 @@ namespace TerrariaCells.Common.GlobalItems
                 switch (InventoryManager.GetItemCategorization(item.type))
                 {
                     case ItemsJson.ItemCategory.Weapons:
-                        item.rare = ItemRarityID.Red; // or custom rarity ID
+                        item.rare = ItemRarityID.Red;
                         break;
                     case ItemsJson.ItemCategory.Abilities:
                         item.rare = ItemRarityID.Green;
@@ -235,7 +235,7 @@ namespace TerrariaCells.Common.GlobalItems
                         item.rare = ItemRarityID.Blue;
                         break;
                     case ItemsJson.ItemCategory.Potions:
-                        item.rare = ItemRarityID.Quest; // Amber-like
+                        item.rare = ItemRarityID.Cyan;
                         break;
                     default:
                         if(item.accessory) item.rare = ItemRarityID.Yellow;
@@ -299,6 +299,7 @@ namespace TerrariaCells.Common.GlobalItems
 
         public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
         {
+            return;
             Player player = Main.LocalPlayer;
 
             // Iterate through the list of tooltips so we can change vanilla tooltips
@@ -371,32 +372,32 @@ namespace TerrariaCells.Common.GlobalItems
                 }
             }
 
-            TooltipLine itemCategorizationTooltip = new(Mod, "ItemCategorization", "");
+            //TooltipLine itemCategorizationTooltip = new(Mod, "ItemCategorization", "");
             switch (InventoryManager.GetItemCategorization(item.netID))
             {
-                case ItemsJson.ItemCategory.Weapons:
-                    itemCategorizationTooltip.OverrideColor = LimitedStorageUI.weaponSlotColor;
-                    itemCategorizationTooltip.Text = "Weapon";
-                    break;
-                case ItemsJson.ItemCategory.Abilities:
-                    itemCategorizationTooltip.OverrideColor = LimitedStorageUI.skillSlotColor;
-                    itemCategorizationTooltip.Text = "Skill";
-                    break;
-                case ItemsJson.ItemCategory.Potions:
-                    itemCategorizationTooltip.OverrideColor = LimitedStorageUI.potionSlotColor;
-                    itemCategorizationTooltip.Text = "Potion";
-                    break;
+                //case ItemsJson.ItemCategory.Weapons:
+                    //itemCategorizationTooltip.OverrideColor = LimitedStorageUI.weaponSlotColor;
+                    //itemCategorizationTooltip.Text = "Weapon";
+                    //break;
+                //case ItemsJson.ItemCategory.Abilities:
+                    //itemCategorizationTooltip.OverrideColor = LimitedStorageUI.skillSlotColor;
+                    //itemCategorizationTooltip.Text = "Skill";
+                    //break;
+                //case ItemsJson.ItemCategory.Potions:
+                    //itemCategorizationTooltip.OverrideColor = LimitedStorageUI.potionSlotColor;
+                    //itemCategorizationTooltip.Text = "Potion";
+                    //break;
             }
 
-            int index = tooltips.FindIndex(x => x.Name == "Damage");
-            if (index == -1)
-            {
-                tooltips.Add(itemCategorizationTooltip);
-            }
-            else
-            {
-                tooltips.Insert(index, itemCategorizationTooltip);
-            }
+            // int index = tooltips.FindIndex(x => x.Name == "Damage");
+            // if (index == -1)
+            // {
+            //     tooltips.Add(itemCategorizationTooltip);
+            // }
+            // else
+            // {
+            //     tooltips.Insert(index, itemCategorizationTooltip);
+            // }
 
             //Add tooltips at the end
             switch (item.type)

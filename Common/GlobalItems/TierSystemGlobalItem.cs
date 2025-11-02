@@ -27,7 +27,7 @@ namespace TerrariaCells.Common.GlobalItems
         // Only apply item levels to weapons
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
-            return (lateInstantiation && (entity.damage > 0 || entity.shoot != ItemID.None))
+            return (lateInstantiation && (entity.damage > 0 || entity.shoot != ProjectileID.None))
                 || InventoryManager.GetItemCategorization(entity.type) == ItemsJson.ItemCategory.Weapons;
         }
 

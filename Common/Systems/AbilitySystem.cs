@@ -502,6 +502,7 @@ namespace TerrariaCells.Common.Systems
 
 		public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
 		{
+			return;
             tooltips.Find(x => x.Name.Equals("EtherianManaWarning"))?.Hide();
             tooltips.Find(x => x.Name.Equals("BuffTime"))?.Hide();
 		}

@@ -192,19 +192,55 @@ Configs: {
 
 	DebuffIndicators: {
 		Tooltip: ""
-		None.Label: None
-		Icon.Label: Icon
-		Particles.Label: Particles
-		IconAndParticles.Label: Icon and Particles
+
+		None: {
+			Label: None
+			Tooltip: ""
+		}
+
+		Icon: {
+			Label: Icon
+			Tooltip: ""
+		}
+
+		Particles: {
+			Label: Particles
+			Tooltip: ""
+		}
+
+		IconAndParticles: {
+			Label: Icon and Particles
+			Tooltip: ""
+		}
 	}
 
 	AmmoPositionMode: {
 		Tooltip: ""
-		Cursor.Label: Cursor
-		Tween.Label: Tween
-		TweenSag.Label: Tween Sag
-		Player.Label: Player
-		Resource.Label: Resource
+
+		Cursor: {
+			Label: Cursor
+			Tooltip: ""
+		}
+
+		Tween: {
+			Label: Tween
+			Tooltip: ""
+		}
+
+		TweenSag: {
+			Label: Tween Sag
+			Tooltip: ""
+		}
+
+		Player: {
+			Label: Player
+			Tooltip: ""
+		}
+
+		Resource: {
+			Label: Resource
+			Tooltip: ""
+		}
 	}
 }
 
@@ -420,4 +456,12 @@ ui: {
 		entry_1: You unlocked the Goblin Tinkerer in the Inn
 		entry_0: You unlocked the Double Jump!
 	}
+}
+
+Category: {
+	Weapons: Weapon
+	Abilities: Ability
+	Accessories: Accessory
+	Armor: Armour
+	Potions: Potion
 }

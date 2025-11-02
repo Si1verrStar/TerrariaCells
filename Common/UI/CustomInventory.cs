@@ -2607,11 +2607,11 @@ public class LimitedStorageUI : Common.UI.Components.Windows.WindowState
             {
                 case 0:
                 case 1:
-                    value = TextureAssets.InventoryBack3.Value;
+                    value = TextureAssets.InventoryBack11.Value;
                     break;
                 case 2:
                 case 3:
-                    value = TextureAssets.InventoryBack11.Value;
+                    value = TextureAssets.InventoryBack3.Value;
                     break;
                 case 4:
                     value = TextureAssets.InventoryBack12.Value;
@@ -2989,7 +2989,7 @@ public class LimitedStorageUI : Common.UI.Components.Windows.WindowState
                     FontAssets.ItemStack.Value,
                     text,
                     position + new Vector2(8f, 4f) * inventoryScale,
-                    color,
+                    color, //Affects colour of numbers on hotbar OUTSIDE of inventory
                     0f,
                     Vector2.Zero,
                     new Vector2(inventoryScale),
@@ -3082,7 +3082,7 @@ public class LimitedStorageUI : Common.UI.Components.Windows.WindowState
                 FontAssets.ItemStack.Value,
                 text2,
                 position + new Vector2(6f, 4 + num12) * inventoryScale,
-                baseColor,
+                Color.White with { A = 200 },
                 0f,
                 Vector2.Zero,
                 new Vector2(inventoryScale),
