@@ -388,6 +388,32 @@ Tooltips: {
 	Cooldown: Cooldown: {0} Seconds
 	SummonTime: Summon Time: {0} Seconds
 	AttacksPerSecond: " ({0} Attacks Per Second)"
+
+	Modifiers: {
+		Damage: "{0}% damage"
+		ProjectileVelocity: "{0}% projectile speed"
+		AttackSpeed: "{0}% attack speed"
+		Size: "{0}% weapon size"
+		ManaCost: "{0}% mana cost"
+		ImbuedDamage: "{0}% damage, {1}% mana cost"
+		FrenzyFire: "{0}% damage, {0}% attack speed"
+		DamageOnDebuff: "{0}% damage vs targets afflicted by {2}"
+		CustomAmmoBullet: Weapon fires {2}
+		ApplyDebuff: Inflicts {2} for {3} seconds
+		CritsExplode: Critical strikes are explosive
+		DropMoreMana: Enemies drop {0}% more Mana Stars when hit
+	}
+
+	Category: {
+		Weapons: Weapon
+		Abilities: Ability
+		Accessories: Accessory
+		Armor: Armour
+		Potions: Potion
+	}
+
+	AbilityDuration: Duration {0} second(s)
+	AbilityCooldown: Cooldown {0} second(s)
 }
 
 Keybinds: {
@@ -480,3 +506,5 @@ Modifiers: {
 	CritsExplode: Critical strikes are explosive
 	DropMoreMana: Enemies drop {0}% more Mana Stars when hit
 }
+
+"": Duration {0} {^0second;seconds}

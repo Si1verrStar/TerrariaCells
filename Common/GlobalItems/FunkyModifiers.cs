@@ -234,7 +234,7 @@ public struct FunkyModifier(FunkyModifierType type, float modifier)
                 _ => string.Empty,
             };
             if (string.IsNullOrEmpty(@default)) continue;
-            _localization.Add(type, Language.GetOrRegister(mod.GetLocalizationKey($"Modifiers.{type.ToString()}"), () => @default));
+            _localization.Add(type, Language.GetOrRegister(mod.GetLocalizationKey($"Tooltips.Modifiers.{type.ToString()}"), () => @default));
         }
     }
     
@@ -315,8 +315,6 @@ public struct FunkyModifier(FunkyModifierType type, float modifier)
 
 	public override string ToString()
 	{
-		string s = "";
-        // s += $"[{modifierType}] ";
 		float mod1 = (modifier - 1) * 100;
 		string mod1Text = $"{mod1:+#.#;-#.#;0.0}";
 		float mod2 = (secondaryModifier - 1) * 100;

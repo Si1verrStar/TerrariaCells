@@ -17,6 +17,8 @@ using TerrariaCells.Common.Utilities;
 using static TerrariaCells.Common.Utilities.NumberHelpers;
 using static TerrariaCells.Common.Systems.AbilityConditions;
 using TerrariaCells.Common.ModPlayers;
+using TerrariaCells.Common.GlobalItems;
+using Terraria.Localization;
 
 //Genuinely, I'm just using this for anything that I deem sufficiently complex
 //Involving multiple parts working together to form one collective piece (a "system of parts" if you will)
@@ -419,7 +421,7 @@ namespace TerrariaCells.Common.Systems
 	}
 
 	//Detours and IL Edits
-	internal class AbilityEdits : GlobalItem
+	internal class AbilityEdits : GlobalItem, TooltipBuilder.IGlobal, TooltipFilter.IGlobal
 	{
 		#region GlobalItem Impl
 		//Guaranteed that everything this runs on WILL be an ability
@@ -500,13 +502,6 @@ namespace TerrariaCells.Common.Systems
 			return null;
 		}
 
-		public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
-		{
-			return;
-            tooltips.Find(x => x.Name.Equals("EtherianManaWarning"))?.Hide();
-            tooltips.Find(x => x.Name.Equals("BuffTime"))?.Hide();
-		}
-
         public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
         {
             if (player.GetModPlayer<AccessoryPlayer>().heracles)
@@ -514,10 +509,17 @@ namespace TerrariaCells.Common.Systems
                 damage += 0.5f;
             }
         }
-        #endregion
+		#endregion
 
-        public override void Load()
+		private static LocalizedText Local_Duration;
+		private static LocalizedText Local_Cooldown;
+		public override void Load()
 		{
+			ItemTooltips.InsertTooltip("AbilityDuration", "Damage");
+			ItemTooltips.InsertTooltip("AbilityCooldown", "Damage");
+			Local_Duration = Language.GetOrRegister(Mod.GetLocalizationKey("Tooltips.AbilityDuration"), () => "Duration {0} second(s)");
+			Local_Cooldown = Language.GetOrRegister(Mod.GetLocalizationKey("Tooltips.AbilityCooldown"), () => "Cooldown {0} second(s)");
+
 			//IL_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color += IL_ItemSlot_Draw_SpriteBatch_ItemArray_int_int_Vector2_Color;
 
 			// Hook to prevent items from being picked up while the skill slot is on cooldown
@@ -533,7 +535,6 @@ namespace TerrariaCells.Common.Systems
 			// Hooks to prevent non-skill items from being picked up into a skill slot
 			On_Player.GetItem_FillEmptyInventorySlot += On_Player_GetItem_FillEmptyInventorySlot;
 		}
-
 		public override void Unload()
 		{
 			//IL_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color -= IL_ItemSlot_Draw_SpriteBatch_ItemArray_int_int_Vector2_Color;
@@ -550,6 +551,29 @@ namespace TerrariaCells.Common.Systems
 
 			// Hooks to prevent non-skill items from being picked up into a skill slot
 			On_Player.GetItem_FillEmptyInventorySlot -= On_Player_GetItem_FillEmptyInventorySlot;
+		}
+
+		public string BuildTooltip(Item item, string Tooltip)
+		{
+			if (!Ability.IsAbility(item.type)) return null;
+			Ability info = Ability.AbilityList[item.type];
+			switch (Tooltip)
+			{
+				case "AbilityDuration":
+					if(info.Duration > 0)
+						return Local_Duration.Format($"{info.Duration / 60f:0.0}");
+					break;
+				case "AbilityCooldown":
+					if (info.Cooldown > 0)
+						return Local_Cooldown.Format($"{info.Cooldown / 60f:0.0}");
+					break;
+			}
+			return null;
+		}
+		public void GetFilters(Item item, out string[] whitelist, out string[] blacklist)
+		{
+			blacklist = new string[] { };
+			whitelist = new string[] { "Damage", "AbilityDuration", "AbilityCooldown" };
 		}
 
 		#region Detours/IL
@@ -571,8 +595,10 @@ namespace TerrariaCells.Common.Systems
 				c.Emit(Mono.Cecil.Cil.OpCodes.Ldarg_2); // Context
 
 				// Emit the delegate (the code)
-				c.EmitDelegate<Func<Item[], int, Texture2D, int, Texture2D>>((inv, slot, originalTexture, context) => {
-					try {
+				c.EmitDelegate<Func<Item[], int, Texture2D, int, Texture2D>>((inv, slot, originalTexture, context) =>
+				{
+					try
+					{
 						if (Main.gameMenu)
 							return originalTexture;
 						if (!Configs.DevConfig.Instance.EnableInventoryChanges)
@@ -591,11 +617,13 @@ namespace TerrariaCells.Common.Systems
 							}
 
 						}
-                    } catch (IndexOutOfRangeException) {
+					}
+					catch (IndexOutOfRangeException)
+					{
 						// prevent main engine crash on player select
 					}
 
-                    return originalTexture;
+					return originalTexture;
 				});
 
 				// Emit return value
