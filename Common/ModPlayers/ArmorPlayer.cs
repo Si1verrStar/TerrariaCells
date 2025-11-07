@@ -253,17 +253,30 @@ namespace TerrariaCells.Common.ModPlayers
 
                 Player.GetDamage(DamageClass.Generic) += dmgIncrease;
 
-                Player.setBonus = "1% increased damage for every Gold Coin you have\n100% increased damage for every Platinum Coin you have";
+                //Player.setBonus = "1% increased damage for every Gold Coin you have\n100% increased damage for every Platinum Coin you have";
             }
 
-            if (moltenArmorSet)
-                Player.setBonus = "Your Fire effects are replaced with Hellfire";
-            if (jungleArmorSet)
-                Player.setBonus = "Killing an enemy makes your spells free for a short period";
-            if (necroArmorSet)
-                Player.setBonus = "Bows charge twice as fast\nGuns reload twice as fast";
-            if (ninjaArmorSet)
-                Player.setBonus = "Become immune after striking an enemy";
+            // if (moltenArmorSet)
+            //     Player.setBonus = "Your Fire effects are replaced with Hellfire";
+            // if (jungleArmorSet)
+            //     Player.setBonus = "Killing an enemy makes your spells free for a short period";
+            // if (necroArmorSet)
+            //     Player.setBonus = "Bows charge twice as fast\nGuns reload twice as fast";
+            // if (ninjaArmorSet)
+            //     Player.setBonus = "Become immune after striking an enemy";
+
+            if(!string.IsNullOrEmpty(Player.setBonus))
+            {
+                Item helm = Player.armor[0];
+                if (ItemID.Search.TryGetName(helm.type, out string internalName))
+                {
+                    string key = Mod.GetLocalizationKey($"Tooltips.Items.{internalName}.SetBonus");
+                    if(Language.Exists(key))
+                    {
+                        Player.setBonus = Language.GetTextValue(key);
+                    }
+                }
+            }
         }
     }
 }

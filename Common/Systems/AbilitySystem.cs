@@ -421,7 +421,7 @@ namespace TerrariaCells.Common.Systems
 	}
 
 	//Detours and IL Edits
-	internal class AbilityEdits : GlobalItem, TooltipBuilder.IGlobal, TooltipFilter.IGlobal
+	internal class AbilityEdits : GlobalItem
 	{
 		#region GlobalItem Impl
 		//Guaranteed that everything this runs on WILL be an ability
@@ -502,21 +502,30 @@ namespace TerrariaCells.Common.Systems
 			return null;
 		}
 
-        public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
-        {
-            if (player.GetModPlayer<AccessoryPlayer>().heracles)
-            {
-                damage += 0.5f;
-            }
-        }
-		#endregion
-
+		public override void ModifyWeaponDamage(Item item, Player player, ref StatModifier damage)
+		{
+			if (player.GetModPlayer<AccessoryPlayer>().heracles)
+			{
+				damage += 0.5f;
+			}
+		}
+		
 		private static LocalizedText Local_Duration;
 		private static LocalizedText Local_Cooldown;
+		public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
+		{
+			if (!Ability.IsAbility(item.type)) return;
+			Ability info = Ability.AbilityList[item.type];
+			if (info.Cooldown > 0)
+				tooltips.InsertTooltip(new TooltipLine(Mod, "AbilityCooldown", Local_Cooldown.Format($"{info.Cooldown / 60f:0.0}")), "Damage");
+			if(info.Duration > 0)
+				tooltips.InsertTooltip(new TooltipLine(Mod, "AbilityDuration", Local_Duration.Format($"{info.Duration / 60f:0.0}")), "Damage");
+        }
+		#endregion
 		public override void Load()
 		{
-			ItemTooltips.InsertTooltip("AbilityDuration", "Damage");
-			ItemTooltips.InsertTooltip("AbilityCooldown", "Damage");
+			//ItemTooltips.InsertTooltip("AbilityDuration", "Damage");
+			//ItemTooltips.InsertTooltip("AbilityCooldown", "Damage");
 			Local_Duration = Language.GetOrRegister(Mod.GetLocalizationKey("Tooltips.AbilityDuration"), () => "Duration {0} second(s)");
 			Local_Cooldown = Language.GetOrRegister(Mod.GetLocalizationKey("Tooltips.AbilityCooldown"), () => "Cooldown {0} second(s)");
 
@@ -551,29 +560,6 @@ namespace TerrariaCells.Common.Systems
 
 			// Hooks to prevent non-skill items from being picked up into a skill slot
 			On_Player.GetItem_FillEmptyInventorySlot -= On_Player_GetItem_FillEmptyInventorySlot;
-		}
-
-		public string BuildTooltip(Item item, string Tooltip)
-		{
-			if (!Ability.IsAbility(item.type)) return null;
-			Ability info = Ability.AbilityList[item.type];
-			switch (Tooltip)
-			{
-				case "AbilityDuration":
-					if(info.Duration > 0)
-						return Local_Duration.Format($"{info.Duration / 60f:0.0}");
-					break;
-				case "AbilityCooldown":
-					if (info.Cooldown > 0)
-						return Local_Cooldown.Format($"{info.Cooldown / 60f:0.0}");
-					break;
-			}
-			return null;
-		}
-		public void GetFilters(Item item, out string[] whitelist, out string[] blacklist)
-		{
-			blacklist = new string[] { };
-			whitelist = new string[] { "Damage", "AbilityDuration", "AbilityCooldown" };
 		}
 
 		#region Detours/IL
