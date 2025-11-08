@@ -528,6 +528,8 @@ namespace TerrariaCells.Common.Systems
 			//ItemTooltips.InsertTooltip("AbilityCooldown", "Damage");
 			Local_Duration = Language.GetOrRegister(Mod.GetLocalizationKey("Tooltips.AbilityDuration"), () => "Duration {0} second(s)");
 			Local_Cooldown = Language.GetOrRegister(Mod.GetLocalizationKey("Tooltips.AbilityCooldown"), () => "Cooldown {0} second(s)");
+			ItemHelpers.LoadTooltip("AbilityCooldown", "Damage");
+			ItemHelpers.LoadTooltip("AbilityDuration", "Damage");
 
 			//IL_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color += IL_ItemSlot_Draw_SpriteBatch_ItemArray_int_int_Vector2_Color;
 

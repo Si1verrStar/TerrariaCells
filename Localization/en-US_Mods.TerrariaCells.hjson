@@ -414,6 +414,138 @@ Tooltips: {
 
 	AbilityDuration: Duration {0} second(s)
 	AbilityCooldown: Cooldown {0} second(s)
+
+	Items: {
+		# Weapons
+		SniperRifle.Tooltip: Inflicts critical strikes against bosses
+		FieryGreatsword.Tooltip: Striking oiled targets causes explosions, inflicting critical strikes
+		PhoenixBlaster.Tooltip: The final 5 bullets inflict critical strikes
+		SawtoothShark.Tooltip: Rips into enemies, causing them to bleed
+		Gladius.Tooltip: Inflicts critical strikes against poisoned or bleeding targets
+		EmeraldStaff.Tooltip: Inflicts hit enemies with poison
+		RubyStaff.Tooltip: Sets enemies ablaze
+		AleThrowingGlove.Tooltip: Coats targets in oil
+		Minishark.Tooltip: Inflicts critical hits to nearby enemies
+		# Abilities
+		MagicPowerPotion.Tooltip:
+			'''
+			Imbues you with Magic Power
+			Your spells become free
+			'''
+		IronskinPotion.Tooltip: 30% increased movement speed
+		WrathPotion.Tooltip: 25% increased damage
+		# Accessories
+		BandofRegeneration.Tooltip: Killing an enemy heals you by 1% of your max HP
+		BerserkerGlove.Tooltip: Taking damage briefly increases melee damage by 30%
+		FastClock.Tooltip: Killing an enemy briefly increases your speed
+		FeralClaws.Tooltip: 40% increased melee attack speed
+		FrozenTurtleShell.Tooltip:
+			'''
+			If you would die, instead survive on 1 HP
+			Consumed on use
+			'''
+		ObsidianShield.Tooltip:
+			'''
+			Immunity to knockback
+			Reduces damage taken by 20%
+			'''
+		ReconScope.Tooltip: 30% increased damage when no enemies are nearby
+		StalkersQuiver.Tooltip: Arrow attacks cause spectral arrows to attack the target
+
+		ChlorophyteDye: {
+			ItemName: Chlorophyte Coating
+			Tooltip: Bullets and arrows become coated in chlorophyte
+		}
+
+		CelestialMagnet.Tooltip: Increased mana star pickup range
+		NaturesGift.Tooltip: 33% reduced mana cost
+		ArcaneFlower.Tooltip:
+			'''
+			50% increased magic damage
+			50% increased mana cost
+			'''
+		ManaRegenerationBand.Tooltip: Mana passively regenerates
+		MagicCuffs.Tooltip: Restore mana when taking damage
+		Nazar.Tooltip: Melee attacks restore 20 Mana
+		ThePlan.Tooltip: 30% increased damage against healthy enemies
+		CelestialStone.Tooltip: Critical Strikes reduce ability cooldowns by 0.5 sec
+		FlaskofVenom.Tooltip: Your Poison effects are replaced with Venom
+		HerculesBeetle.Tooltip: 50% increased damage to Abilities
+		PhilosophersStone.Tooltip: Health Potions restore 100% more health
+
+		# Armour
+		NinjaHood: {
+			SetBonus: Become immune after striking an enemy
+			Tooltip: 15% increased damage
+		}
+
+		NinjaShirt.Tooltip:
+			'''
+			Allows the ability to dash
+			Double tap in a direction
+			'''
+		NinjaPants.Tooltip: 15% increased movement speed
+
+		JungleHat: {
+			SetBonus: Killing an enemy makes your spells free for a duration
+			Tooltip: 20% increased magic damage
+		}
+
+		JungleShirt.Tooltip: Picking up mana reduces ability cooldowns by 0.5 sec
+		JunglePants.Tooltip:
+			'''
+			10% increased movement speed
+			10% increased magic damage
+			'''
+
+		NecroHelmet: {
+			SetBonus:
+				'''
+				Bows charge twice as fast
+				Guns reload twice as fast
+				'''
+			Tooltip: 20% increased ranged damage
+		}
+
+		NecroBreastplate.Tooltip: Killing an enemy spawns baby spiders to attack your foes
+		NecroGreaves.Tooltip:
+			'''
+			10% increased movement speed
+			The last bullet in a magazine deals 50% more damage
+			'''
+
+		MoltenHelmet: {
+			SetBonus: Your Fire effects are replaced with Hellfire
+			Tooltip: 20% increased melee damage
+		}
+
+		MoltenBreastplate.Tooltip:
+			'''
+			Reduces damage taken by 20%
+			Taking damage applies a stack of On Fire to nearby enemies
+			'''
+		MoltenGreaves.Tooltip:
+			'''
+			10% increased movement speed
+			Leaves a trail of flames in your wake
+			'''
+
+		GoldHelmet: {
+			SetBonus:
+				'''
+				1% increased damage for every Gold Coin you have
+				100% increased damage for every Platinum Coin you have
+				'''
+			Tooltip:
+				'''
+				10% increased damage
+				Enemies drop money on hit
+				'''
+		}
+
+		GoldChainmail.Tooltip: Enemies drop money on hit
+		GoldGreaves.Tooltip: Enemies drop money on hit
+	}
 }
 
 Keybinds: {

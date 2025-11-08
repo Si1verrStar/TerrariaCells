@@ -12,7 +12,7 @@ using TerrariaCells.Common.GlobalNPCs;
 using TerrariaCells.Common.GlobalProjectiles;
 using TerrariaCells.Common.Items;
 using TerrariaCells.Common.ModPlayers;
-
+using TerrariaCells.Common.Utilities;
 using static Terraria.GameContent.Animations.IL_Actions.NPCs;
 
 namespace TerrariaCells.Common.GlobalItems;
@@ -23,7 +23,7 @@ namespace TerrariaCells.Common.GlobalItems;
 ///
 /// This portion contains the logic of the modifier system, use this when adding new modifier types.
 /// </summary>
-public partial class FunkyModifierItemModifier : GlobalItem, TooltipBuilder.IGlobal, TooltipFilter.IGlobal
+public partial class FunkyModifierItemModifier : GlobalItem
 {
     public override bool InstancePerEntity => true;
 
@@ -123,32 +123,9 @@ public partial class FunkyModifierItemModifier : GlobalItem, TooltipBuilder.IGlo
 
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips)
     {
-        if (!item.TryGetGlobalItem(out FunkyModifierItemModifier funkyModifiers))
+        for (int i = 0; i < modifiers.Length; i++)
         {
-            return;
-        }
-        FunkyModifier[] array = funkyModifiers.modifiers ?? [];
-        for (int i = 0; i < array.Length; i++)
-        {
-            FunkyModifier modifier = array[i];
-            int index = tooltips.FindIndex(x => x.Name == "PrefixDamage");
-            if (index == -1)
-            {
-                tooltips.Add(
-                    new TooltipLine(Mod, "FunkyModifier" + i.ToString(), modifier.ToString())
-                    {
-                        IsModifier = true,
-                    }
-                );
-                continue;
-            }
-            tooltips.Insert(
-                index,
-                new TooltipLine(Mod, "FunkyModifier" + i.ToString(), modifier.ToString())
-                {
-                    IsModifier = true,
-                }
-            );
+            tooltips.InsertTooltip(new TooltipLine(Mod, $"FunkyModifier{i}", modifiers[i].ToString()) { IsModifier = true }, "PrefixDamage");
         }
     }
 
@@ -430,25 +407,7 @@ public partial class FunkyModifierItemModifier : GlobalItem, TooltipBuilder.IGlo
 
     public override void Load()
     {
-        ItemTooltips.InsertTooltip("FunkyModifier0", "OneDropLogo");
-        ItemTooltips.InsertTooltip("FunkyModifier1", "FunkyModifier0");
-        ItemTooltips.InsertTooltip("FunkyModifier2", "FunkyModifier1");
-        ItemTooltips.InsertTooltip("FunkyModifier3", "FunkyModifier2");
-        ItemTooltips.InsertTooltip("FunkyModifier4", "FunkyModifier3");
-        ItemTooltips.InsertTooltip("FunkyModifier5", "FunkyModifier4");
         FunkyModifier.LoadLocalization(Mod);
-    }
-    public void GetFilters(Item item, out string[] whitelist, out string[] blacklist)
-    {
-        whitelist = new string[] { "FunkyModifier0", "FunkyModifier1", "FunkyModifier2", "FunkyModifier3", "FunkyModifier4", "FunkyModifier5" };
-        blacklist = Array.Empty<string>();
-    }
-    public string BuildTooltip(Item item, string Tooltip)
-    {
-        if (!Tooltip.StartsWith("FunkyModifier")) return null;
-        if (!int.TryParse(Tooltip[..^1], out int id)) return null;
-        if (id < 0 || id >= modifiers.Length) return null;
-        return modifiers[id].ToString();
     }
 }
 
