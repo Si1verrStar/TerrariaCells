@@ -517,9 +517,9 @@ namespace TerrariaCells.Common.Systems
 			if (!Ability.IsAbility(item.type)) return;
 			Ability info = Ability.AbilityList[item.type];
 			if (info.Cooldown > 0)
-				tooltips.InsertTooltip(new TooltipLine(Mod, "AbilityCooldown", Local_Cooldown.Format($"{info.Cooldown / 60f:0.0}")), "Damage");
+				tooltips.InsertTooltip(new TooltipLine(Mod, "AbilityCooldown", Local_Cooldown.Format($"{info.Cooldown / 60f:0.0}")));
 			if(info.Duration > 0)
-				tooltips.InsertTooltip(new TooltipLine(Mod, "AbilityDuration", Local_Duration.Format($"{info.Duration / 60f:0.0}")), "Damage");
+				tooltips.InsertTooltip(new TooltipLine(Mod, "AbilityDuration", Local_Duration.Format($"{info.Duration / 60f:0.0}")));
         }
 		#endregion
 		public override void Load()
@@ -528,8 +528,8 @@ namespace TerrariaCells.Common.Systems
 			//ItemTooltips.InsertTooltip("AbilityCooldown", "Damage");
 			Local_Duration = Language.GetOrRegister(Mod.GetLocalizationKey("Tooltips.AbilityDuration"), () => "Duration {0} second(s)");
 			Local_Cooldown = Language.GetOrRegister(Mod.GetLocalizationKey("Tooltips.AbilityCooldown"), () => "Cooldown {0} second(s)");
-			ItemHelpers.LoadTooltip("AbilityCooldown", "Damage");
-			ItemHelpers.LoadTooltip("AbilityDuration", "Damage");
+			TooltipReorganization.LoadTooltip("AbilityCooldown", "Damage");
+			TooltipReorganization.LoadTooltip("AbilityDuration", "Damage");
 
 			//IL_ItemSlot.Draw_SpriteBatch_ItemArray_int_int_Vector2_Color += IL_ItemSlot_Draw_SpriteBatch_ItemArray_int_int_Vector2_Color;
 
