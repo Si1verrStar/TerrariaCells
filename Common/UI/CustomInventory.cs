@@ -466,6 +466,100 @@ public class LimitedStorageUI : Common.UI.Components.Windows.WindowState
                 }
             }
         }
+
+        //Drawing "sell item from inventory" slot to the right of the last slot in the bottom row
+        {
+            int xPos = (int)(20f + (4 * 56) * Main.inventoryScale) + num;
+            int yPos = (int)(20f + 60 * Main.inventoryScale) + num2;
+            if (
+                !Main.mouseItem.IsAir
+                && Main.mouseX >= xPos
+                && Main.mouseX <= xPos + TextureAssets.InventoryBack.Width() * Main.inventoryScale
+                && Main.mouseY >= yPos
+                && Main.mouseY <= yPos + TextureAssets.InventoryBack.Height() * Main.inventoryScale
+                && !PlayerInput.IgnoreMouseInterface
+            )
+            {
+                Main.LocalPlayer.mouseInterface = true;
+                int value = (Main.mouseItem.value * Main.mouseItem.stack) / 5;
+                string text = string.Empty;
+                //Put numerical value of item into item tag format
+                if (value >= 1_00_00_00)
+                {
+                    text += $"[i/s{value / 1_00_00_00}:{ItemID.PlatinumCoin}]";
+                    value %= 1_00_00_00;
+                }
+                if (value >= 1_00_00)
+                {
+                    text += $"[i/s{value / 1_00_00}:{ItemID.GoldCoin}]";
+                    value %= 1_00_00;
+                }
+                if (value >= 1_00)
+                {
+                    text += $"[i/s{value / 1_00}:{ItemID.SilverCoin}]";
+                    value %= 1_00;
+                }
+                if (value >= 1)
+                {
+                    text += $"[i/s{value}:{ItemID.CopperCoin}]";
+                }
+                Terraria.ModLoader.UI.UICommon.TooltipMouseText($"Sell for {text}?");
+
+                bool isMouseLeftRelease = Main.mouseLeftRelease && Main.mouseLeft;
+                if (isMouseLeftRelease)
+                {
+                    value = (Main.mouseItem.value * Main.mouseItem.stack) / 5;
+                    Main.mouseItem.TurnToAir();
+
+                    if (value >= 1_00_00_00)
+                    {
+                        Main.LocalPlayer.QuickSpawnItem(Main.LocalPlayer.GetSource_GiftOrReward(), ItemID.PlatinumCoin, value / 1_00_00_00);
+                        value %= 1_00_00_00;
+                    }
+                    if (value >= 1_00_00)
+                    {
+                        Main.LocalPlayer.QuickSpawnItem(Main.LocalPlayer.GetSource_GiftOrReward(), ItemID.GoldCoin, value / 1_00_00);
+                        value %= 1_00_00;
+                    }
+                    if (value >= 1_00)
+                    {
+                        Main.LocalPlayer.QuickSpawnItem(Main.LocalPlayer.GetSource_GiftOrReward(), ItemID.SilverCoin, value / 1_00);
+                        value %= 1_00;
+                    }
+                    if (value >= 1)
+                    {
+                        Main.LocalPlayer.QuickSpawnItem(Main.LocalPlayer.GetSource_GiftOrReward(), ItemID.CopperCoin, value);
+                    }
+
+                    Terraria.Audio.SoundEngine.PlaySound(SoundID.Coins);
+                }
+            }
+
+            Item[] fakeArray = new Item[1] { new Item() };
+            ItemSlotDraw(
+                Main.spriteBatch,
+                fakeArray,
+                15,
+                0,
+                new Vector2(xPos, yPos),
+                Color.Yellow
+            );
+
+            ReLogic.Content.Asset<Texture2D> asset = ModContent.Request<Texture2D>("Terraria/Images/UI/Bestiary/Icon_Tags_Shadow");
+            if (asset.IsLoaded)
+            {
+                int sizeLimit = 60 - 8;
+                Rectangle frame = new Rectangle(13 * 30, 3 * 30, 30, 30);
+                Vector2 size = frame.Size();
+                float scale = 1f;
+                if ((float)size.X > sizeLimit || (float)size.Y > sizeLimit)
+                    scale = ((size.X <= size.Y) ? (sizeLimit / (float)size.Y) : (sizeLimit / (float)size.X));
+                Vector2 offset = size * 0.5f;
+
+                Main.spriteBatch.Draw(asset.Value, new Vector2(xPos, yPos) + (TextureAssets.InventoryBack.Size() * Main.inventoryScale * 0.5f), frame, Color.DarkGray * 0.5f, 0f, offset, scale, SpriteEffects.None, 0f);
+            }
+        }
+
         // }
 
         /*
