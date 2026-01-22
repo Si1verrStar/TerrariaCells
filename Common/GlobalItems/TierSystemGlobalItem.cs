@@ -39,6 +39,8 @@ namespace TerrariaCells.Common.GlobalItems
 
             //item.rare = itemLevel;
             //Math.Clamp(item.rare, 0, 10);
+            
+            item.value = (int)(item.value * MathF.Pow(2, (itemLevel - 1) * 0.75f));
         }
 
         public void AddLevels(Item item, int level)
