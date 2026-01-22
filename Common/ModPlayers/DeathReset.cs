@@ -152,12 +152,16 @@ public class DeathReset : ModPlayer, IEntitySource
         NewWorld,
         Death,
     }
-    private void ResetInventory(ResetInventoryContext context)
+    void ResetInventory(ResetInventoryContext context)
     {
         if (!DevConfig.Instance.DropItems)
             return;
         if (Player.whoAmI != Main.myPlayer)
             return;
+            
+        Player.GetModPlayer<Common.Systems.RunDataPlayer>().Reset();
+        if(context == ResetInventoryContext.NewWorld)
+            ModContent.GetInstance<Common.Systems.RunDataSystem>().Reset();
 
         #region Drop Items
         ref Item[] inventory = ref Player.inventory;

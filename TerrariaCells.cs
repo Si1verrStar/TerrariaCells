@@ -20,11 +20,12 @@ namespace TerrariaCells
             ModNetHandler.HandlePacket(this, reader, whoAmI);
         }
 
-        public static Mod Instance { get; private set; }
+        private static Mod _instance;
+        public static Mod Instance => _instance ??= ModContent.GetInstance<TerrariaCells>();
         public override void Load()
         {
+            _instance = this;
             StaticFileAccess.Init(this);
-            Instance = this;
         }
 
         public override void PostSetupContent()

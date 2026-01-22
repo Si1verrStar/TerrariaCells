@@ -29,6 +29,7 @@ namespace TerrariaCells.Common.GlobalItems
         {
             return (lateInstantiation && (entity.damage > 0 || entity.shoot != ProjectileID.None))
                 || InventoryManager.GetItemCategorization(entity.type) == ItemsJson.ItemCategory.Weapons;
+        #pragma warning enable
         }
 
         public override void SetDefaults(Item item)

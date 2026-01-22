@@ -29,6 +29,8 @@ namespace TerrariaCells.Content.Tiles.LevelExitPylon;
 /// </summary>
 public class ForestExitPylon : ModTile
 {
+    public const string END_RUN_PORTAL_TEXT = "END_RUN";
+
     public override string Texture =>
         (GetType().Namespace + "." + "ExamplePylonTile").Replace('.', '/');
 
@@ -198,9 +200,11 @@ public class ForestExitPylon : ModTile
         {
             if (Main.netMode == NetmodeID.SinglePlayer)
             {
-                if (!ModContent.GetInstance<TeleportTracker>().CanTeleport(entity.Destination))
+                if(entity.Destination.Equals(END_RUN_PORTAL_TEXT) || !ModContent.GetInstance<TeleportTracker>().CanTeleport(entity.Destination))
                 {
-                    Main.NewText("This level: coming soon. Maybe.");
+                    //ModContent.GetInstance<RunDataSystem>().FlushPath();
+                    //Main.LocalPlayer.GetModPlayer<RunDataPlayer>().FlushPath();
+                    DeadCellsUISystem.ToggleActive<RunDataWindow>(true);
                 }
                 ModContent.GetInstance<TeleportTracker>().Teleport(entity.Destination);
             }

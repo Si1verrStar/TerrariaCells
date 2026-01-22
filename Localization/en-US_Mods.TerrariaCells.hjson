@@ -614,6 +614,67 @@ ui: {
 		entry_1: You unlocked the Goblin Tinkerer in the Inn
 		entry_0: You unlocked the Double Jump!
 	}
+
+	runData: {
+		field: {
+			HitsTaken: {
+				label: Hits Taken
+				tooltip: The number of individual hits you received
+			}
+
+			Kills: {
+				label: Kills
+				tooltip: The number of enemies you killed
+			}
+
+			Time: {
+				label: Time
+				tooltip: The amount of time taken
+			}
+
+			DamageTaken: {
+				label: Damage Taken
+				tooltip: The amount of damage you received
+			}
+
+			HitsDealt: {
+				label: Hits Dealt
+				tooltip: The number of individual hits you dealt
+			}
+
+			DamageDealt: {
+				label: Damage Dealt
+				tooltip: The amount of damage you dealt
+			}
+
+			Money: {
+				label: Money
+				tooltip: The amount of money you picked up
+			}
+
+			Life: {
+				label: Life
+				tooltip: The number of life crystals you found
+			}
+
+			Crits: {
+				label: Crits
+				tooltip: Crits_tooltip
+			}
+
+			Debuffs: {
+				label: Debuffs
+				tooltip: Debuffs_tooltip
+			}
+		}
+
+		close.text: Close
+
+		exit: {
+			text: End Run
+			confirm: Double click to confirm
+		}
+	}
 }
 
 Category: {

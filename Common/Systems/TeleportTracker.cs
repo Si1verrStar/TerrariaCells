@@ -89,6 +89,8 @@ public class TeleportTracker : ModSystem
         Update_SetVariables(destination); //Input: current location
         Point16 telePos = GetTelePos("Inn"); //Input: "going to" location
         Update_SetWorldConditions(destination); //Input: current location
+        ModContent.GetInstance<RunDataSystem>().FlushPath(destination);
+        Main.LocalPlayer.GetModPlayer<RunDataPlayer>().FlushPath(destination);
 
         Main.LocalPlayer.Teleport(telePos.ToWorldCoordinates(), TeleportationStyleID.Portal);
         DoTeleportNPCCheck("Inn", telePos.ToWorldCoordinates());
