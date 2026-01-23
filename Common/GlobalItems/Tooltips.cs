@@ -58,7 +58,7 @@ public partial class VanillaReworksGlobalItem
             {
                 case ItemsJson.ItemCategory.Weapons:
                     categoryTooltip = new TooltipLine(Mod, "Category", Cat_Weapons.Value) { OverrideColor = Color.DarkRed };
-                    tooltips.FilterTooltips(new string[] { "Damage", "Speed", "ManaCost", "Tooltip" });
+                    tooltips.FilterTooltips(new string[] { "Damage", "Speed", "UseMana", "Tooltip" });
                     break;
 
                 case ItemsJson.ItemCategory.Abilities:
