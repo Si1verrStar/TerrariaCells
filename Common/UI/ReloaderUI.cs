@@ -88,7 +88,7 @@ namespace TerrariaCells.Common.UI
             );
             if (barRect.Contains(Main.mouseX, Main.mouseY))
             {
-                Main.NewText(dragging);
+                //Main.NewText(dragging);
 
                 DragStart(evt);
             }

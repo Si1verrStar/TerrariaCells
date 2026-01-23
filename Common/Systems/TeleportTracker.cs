@@ -103,13 +103,13 @@ public class TeleportTracker : ModSystem
 
         if (worldLevelData == null)
         {
-            Main.NewText($"Teleport failed, worldgen information missing. (check client.log for more info)");
+            //Main.NewText($"Teleport failed, worldgen information missing. (check client.log for more info)");
             return;
         }
 
         if (!worldLevelData.LevelVariations.ContainsKey(destination))
         {
-            Main.NewText($"Could not go to {nextLevelVariation}, for the level does not yet exist.");
+            //Main.NewText($"Could not go to {nextLevelVariation}, for the level does not yet exist.");
             Mod.Logger.Error($"Tried to go to level {nextLevelVariation}, but it doesn't exist.");
             return;
         }
@@ -184,7 +184,7 @@ public class TeleportTracker : ModSystem
         Mod.Logger.Info($"	Variation: {nextLevelVariation}");
 
         if (!worldLevelData.LevelPositions.TryGetValue(nextLevel, out Point16 roomPos)) {
-            Main.NewText($"Could not go to {nextLevelVariation}, for the level does not yet exist.");
+            //Main.NewText($"Could not go to {nextLevelVariation}, for the level does not yet exist.");
             Mod.Logger.Error($"Tried to go to level {nextLevelVariation}, but it doesn't exist.");
             return;
         }
