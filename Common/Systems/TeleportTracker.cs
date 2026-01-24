@@ -40,7 +40,7 @@ public class TeleportTracker : ModSystem
     public override void ClearWorld()
     {
         SetDefaults();
-        Update_SetWorldConditions("Inn");
+        //Update_SetWorldConditions("Inn");
         deferredTimeSet = true;
         /*Mod.Logger.Info($"b4: {Main.time};{Main.dayTime}");
         Main.dayTime = false;
