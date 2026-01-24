@@ -43,11 +43,6 @@ namespace TerrariaCells.Common.Systems
             On_Player.QuickMinecart += On_Player_QuickMinecart;
             Terraria.UI.IL_ItemSlot.OverrideHover_ItemArray_int_int += IL_OverrideHover_ItemArray_int_int;
             On_Main.HandleMeteorFall += On_Main_HandleMeteorFall;
-            
-            On_Dust.NewDust+=(On_Dust.orig_NewDust orig, Vector2 pos, int width, int height, int type, float speedX, float speedY, int alpha, Color colour, float scale) =>
-            {
-                return orig.Invoke(pos, width, height, type, speedX, speedY, alpha, colour, scale);
-            };
         }
 
         public override void Unload()
