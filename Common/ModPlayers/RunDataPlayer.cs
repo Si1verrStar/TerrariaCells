@@ -95,7 +95,10 @@ public class RunDataPlayer : ModPlayer
 
     public void FlushPath()
     {
-        _runSummary.Add(currentRegion.ToLower(), CurrentRegionData);
+        if(!_runSummary.TryAdd(currentRegion.ToLower(), CurrentRegionData))
+        {
+            Main.NewText($"Player could not flush current data: {currentRegion}");
+        }
     }
     public void SetNewRegion(string @new)
     {
@@ -220,8 +223,17 @@ public class RunDataSystem : ModSystem
     public RunData CurrentRegionData { get => currentRegionData; private set => currentRegionData = value; }
     public void FlushPath()
     {
-        _runSummary.Add(CurrentRegion.ToLower(), CurrentRegionData with { Time = RewardTrackerSystem.LevelTime - currentRegionData.Time });
-        _path.Add(CurrentRegion);
+        if(!_runSummary.TryAdd(CurrentRegion.ToLower(), CurrentRegionData with { Time = RewardTrackerSystem.LevelTime - currentRegionData.Time }))
+        {
+            if(Main.dedServ)
+                System.Console.WriteLine($"World could not flush current data {CurrentRegion}");
+            else
+                Main.NewText($"World could not flush current data {CurrentRegion}");
+        }
+        else
+        {
+            _path.Add(CurrentRegion);
+        }
     }
     public void SetNewRegion(string @new)
     {
