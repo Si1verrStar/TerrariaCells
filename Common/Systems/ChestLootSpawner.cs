@@ -41,7 +41,15 @@ public class ChestLootSpawner : ModSystem, IEntitySource
 
     public void Reset()
     {
-        if (DevConfig.Instance.EnableChestChanges)
+        if(lootedChests is null)
+        {
+            lootedChests = new List<int>();
+        }
+        if(lootedChests.Count == 0)
+        {
+            return;
+        }
+        if (DevConfig.Instance?.EnableChestChanges == true)
         {
             foreach (int chest in lootedChests)
             {
