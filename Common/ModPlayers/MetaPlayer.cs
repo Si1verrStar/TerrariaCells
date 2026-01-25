@@ -349,7 +349,7 @@ namespace TerrariaCells.Common.ModPlayers
                         break;
                     case NPCID.QueenBee:
                         modPlayer.DownedQB = true;
-                        modPlayer.UpdateItemStatus(ItemID.Beenade, UnlockState.Unlocked);
+                        //modPlayer.UpdateItemStatus(ItemID.Beenade, UnlockState.Unlocked);
                         modPlayer.UpdateItemStatus(ItemID.HornetStaff, UnlockState.Unlocked);
                         break;
                     case NPCID.SkeletronHead:
