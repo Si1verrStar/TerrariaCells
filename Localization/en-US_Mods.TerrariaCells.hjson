@@ -345,6 +345,11 @@ Items: {
 		DisplayName: Dungeon Pylon
 		Tooltip: ""
 	}
+
+	ItemPickup: {
+		DisplayName: Item Pickup
+		Tooltip: ""
+	}
 }
 
 Projectiles: {
