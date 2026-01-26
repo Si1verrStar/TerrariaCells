@@ -10,6 +10,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.WorldBuilding;
 using TerrariaCells.Common.GlobalItems;
+using TerrariaCells.Common.Utilities;
 using TerrariaCells.Content.Buffs;
 using TerrariaCells.Content.Projectiles;
 using TerrariaCells.Content.WeaponAnimations;
@@ -82,7 +83,7 @@ namespace TerrariaCells.Common.ModPlayers
             
             if(Main.netMode != 2 && Player.whoAmI == Main.myPlayer)
             {
-                if(goldArmorCount > 0)
+                if(target.CanBeUsedForHitEffects() && !NPCID.Sets.NeverDropsResourcePickups[target.type] && goldArmorCount > 0)
                 {
                     int amountToDrop = Main.rand.Next(1_50 * goldArmorCount, 3_33 * goldArmorCount);
                     int copper = amountToDrop % 100;

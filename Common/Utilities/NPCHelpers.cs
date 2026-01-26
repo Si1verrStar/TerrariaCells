@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.ID;
 
 namespace TerrariaCells.Common.Utilities
 {
@@ -125,6 +126,11 @@ namespace TerrariaCells.Common.Utilities
 				dust.scale = Main.rand.NextFloat(1f, 1.2f);
 			}
 			CombatText.NewText(npc.getRect() with { Y = (int)npc.position.Y + npc.height }, Color.Crimson, "!!", true);
+		}
+
+		public static bool CanBeUsedForHitEffects(this NPC self)
+		{
+			return self.active && !self.friendly && self.lifeMax > 5 && !self.dontTakeDamage && !self.immortal && !NPCID.Sets.ProjectileNPC[self.type];
 		}
 	}
 }

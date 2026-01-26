@@ -9,6 +9,7 @@ using MonoMod;
 using MonoMod.Cil;
 using Mono.Cecil.Cil;
 using Terraria.DataStructures;
+using TerrariaCells.Common.Utilities;
 
 namespace TerrariaCells.Common.ModPlayers
 {
@@ -350,9 +351,11 @@ namespace TerrariaCells.Common.ModPlayers
         public override void OnHitNPC(NPC target, NPC.HitInfo hit, int damageDone)
         {
             if (target.life < 1) OnKill(target, hit, damageDone);
+            
+            if(!target.CanBeUsedForHitEffects()) return;
             if (hit.DamageType.CountsAsClass(DamageClass.Melee))
             {
-                if (nazar && target.CanBeChasedBy())
+                if (nazar)
                 {
                     Player.statMana += 20;
                     Player.ManaEffect(20);
