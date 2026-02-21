@@ -17,7 +17,7 @@ namespace TerrariaCells.Common.GlobalNPCs.NPCTypes.Shared
     {
         public bool ShouldFly = true;
         public override bool InstancePerEntity => true;
-        public static int[] FlyingEnemies = { NPCID.Vulture};
+        public static int[] FlyingEnemies = {NPCID.Vulture};
         public override bool AppliesToEntity(NPC entity, bool lateInstantiation)
         {
             return FlyingEnemies.Contains(entity.type);
