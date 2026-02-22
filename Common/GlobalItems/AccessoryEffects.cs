@@ -85,6 +85,9 @@ namespace TerrariaCells.Common.GlobalItems
 			ModPlayers.AccessoryPlayer modPlayer = player.GetModPlayer<ModPlayers.AccessoryPlayer>();
 			switch (item.type)
 			{
+				case ItemID.AvengerEmblem:
+				player.GetDamage(DamageClass.Generic) += 0.15f;
+					break;
 				case ItemID.FastClock:
 					modPlayer.fastClock = true;
 					break;

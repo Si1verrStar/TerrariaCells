@@ -453,6 +453,7 @@ Tooltips: {
 		BouncyDynamite.Tooltip: This is a good idea
 		DD2FlameburstTowerT1Popper.Tooltip: Projectiles explode on oiled targets, inflicting critical strikes
 		# Accessories
+		AvengerEmblem.Tooltip: Increases damage by 15%
 		BandofRegeneration.Tooltip: Killing an enemy heals you by 1% of your max HP
 		BerserkerGlove.Tooltip: Taking damage briefly increases melee damage by 30%
 		FastClock.Tooltip: Killing an enemy briefly increases your speed
