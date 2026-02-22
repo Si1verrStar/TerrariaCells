@@ -469,6 +469,7 @@ Tooltips: {
 			'''
 		ReconScope.Tooltip: 30% increased damage when no enemies are nearby
 		StalkersQuiver.Tooltip: Arrow attacks cause spectral arrows to attack the target
+		PygmyNecklace.Tooltip: Increases the number of summoned minions by 1 per minion type
 
 		ChlorophyteDye: {
 			ItemName: Chlorophyte Coating

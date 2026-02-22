@@ -104,7 +104,9 @@ namespace TerrariaCells.Common.GlobalItems
 				case ItemID.CelestialStone:
 					modPlayer.celestialStone = true;
 					break;
-
+				case ItemID.PygmyNecklace:
+					modPlayer.pygmyNecklace = true;
+					break;
 				case ItemID.FeralClaws:
 					player.GetAttackSpeed(DamageClass.Melee) += 0.4f;
 					break;

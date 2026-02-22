@@ -29,6 +29,7 @@ namespace TerrariaCells.Common.Systems
             ItemID.BandofRegeneration,
             ItemID.FastClock,
             ItemID.CelestialStone,
+            ItemID.PygmyNecklace,
         ];
         public override void Load()
 		{
