@@ -50,6 +50,7 @@ namespace TerrariaCells.Common.GlobalProjectiles
 				case ProjectileID.PulseBolt:
 					projectile.penetrate = 3;
 					break;
+                case ProjectileID.AmberBolt:
 				case ProjectileID.RubyBolt:
 				case ProjectileID.EmeraldBolt:
 					projectile.penetrate = 1;
@@ -286,6 +287,9 @@ namespace TerrariaCells.Common.GlobalProjectiles
                 case ProjectileID.SawtoothShark:
 					GlobalNPCs.BuffNPC.AddBuff(target, BuffID.Bleeding, 60 * 3, damageDone);
                     //target.AddBuff(BuffID.Bleeding, 60 * 5);
+                    break;
+                case ProjectileID.AmberBolt:
+                    GlobalNPCs.BuffNPC.AddBuff(target, BuffID.Oiled, 60 * 5, 0);
                     break;
 				case ProjectileID.RubyBolt:
 					GlobalNPCs.BuffNPC.AddBuff(target, BuffID.OnFire, 60 * 5, damageDone);

@@ -438,6 +438,7 @@ Tooltips: {
 		PhoenixBlaster.Tooltip: The final 5 bullets inflict critical strikes
 		SawtoothShark.Tooltip: Rips into enemies, causing them to bleed
 		Gladius.Tooltip: Inflicts critical strikes against poisoned or bleeding targets
+		AmberStaff.Tooltip: Coats targets in oil
 		EmeraldStaff.Tooltip: Inflicts hit enemies with poison
 		RubyStaff.Tooltip: Sets enemies ablaze
 		AleThrowingGlove.Tooltip: Coats targets in oil
