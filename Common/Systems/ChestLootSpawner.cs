@@ -12,6 +12,7 @@ using Terraria.ModLoader.IO;
 using TerrariaCells.Common.Configs;
 using TerrariaCells.Common.GlobalItems;
 using TerrariaCells.Common.ModPlayers;
+using TerrariaCells.Content.WeaponAnimations;
 
 namespace TerrariaCells.Common.Systems;
 
@@ -120,6 +121,16 @@ public class ChestLootSpawner : ModSystem, IEntitySource
                         }
 
                         FunkyModifierItemModifier.Reforge(item);
+
+                        //Set defaults again if the item is a gun so that the extra ammo mod can be applied, must be done to each gun subclass because gun is abstract for some reason
+                        if (item.TryGetGlobalItem<Handgun>(out var HandgunItem))
+                            HandgunItem.SetDefaults(item);
+                        if (item.TryGetGlobalItem<Shotgun>(out var ShotgunItem))
+                            ShotgunItem.SetDefaults(item); 
+                        if (item.TryGetGlobalItem<Autorifle>(out var AutorifleItem))
+                            AutorifleItem.SetDefaults(item); 
+                        if (item.TryGetGlobalItem<Launcher>(out var LauncherItem))
+                            LauncherItem.SetDefaults(item);
                     } else {
                         NPC.NewNPC(this, x * 16, y * 16, NPCID.Firefly);
                     }
@@ -190,6 +201,16 @@ public class ChestLootSpawner : ModSystem, IEntitySource
                         }
 
                         FunkyModifierItemModifier.Reforge(item);
+
+                        //Set defaults again if the item is a gun so that the extra ammo mod can be applied, must be done to each gun subclass because gun is abstract for some reason
+                        if (item.TryGetGlobalItem<Handgun>(out var HandgunItem))
+                            HandgunItem.SetDefaults(item);
+                        if (item.TryGetGlobalItem<Shotgun>(out var ShotgunItem))
+                            ShotgunItem.SetDefaults(item); 
+                        if (item.TryGetGlobalItem<Autorifle>(out var AutorifleItem))
+                            AutorifleItem.SetDefaults(item); 
+                        if (item.TryGetGlobalItem<Launcher>(out var LauncherItem))
+                            LauncherItem.SetDefaults(item);
                     }
                 } else {
                     NPC.NewNPC(this, (x + 1) * 16, y * 16, NPCID.Firefly);
