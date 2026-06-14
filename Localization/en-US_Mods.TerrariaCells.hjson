@@ -414,6 +414,7 @@ Tooltips: {
 		ImbuedDamage: "{0}% damage, {1}% mana cost"
 		FrenzyFire: "{0}% damage, {0}% attack speed"
 		DamageOnDebuff: "{0}% damage vs targets afflicted by {2}"
+		ExtraAmmo: "{0}% more ammo"
 		CustomAmmoBullet: Weapon fires {2}s
 		ApplyDebuff: Inflicts {2} for {3} seconds
 		CritsExplode: Critical strikes are explosive
@@ -438,6 +439,7 @@ Tooltips: {
 		PhoenixBlaster.Tooltip: The final 5 bullets inflict critical strikes
 		SawtoothShark.Tooltip: Rips into enemies, causing them to bleed
 		Gladius.Tooltip: Inflicts critical strikes against poisoned or bleeding targets
+		AmberStaff.Tooltip: Coats targets in oil
 		EmeraldStaff.Tooltip: Inflicts hit enemies with poison
 		RubyStaff.Tooltip: Sets enemies ablaze
 		AleThrowingGlove.Tooltip: Coats targets in oil
@@ -451,7 +453,9 @@ Tooltips: {
 		IronskinPotion.Tooltip: 30% increased movement speed
 		WrathPotion.Tooltip: 25% increased damage
 		BouncyDynamite.Tooltip: This is a good idea
+		DD2FlameburstTowerT1Popper.Tooltip: Projectiles explode on oiled targets, inflicting critical strikes
 		# Accessories
+		AvengerEmblem.Tooltip: Increases damage by 15%
 		BandofRegeneration.Tooltip: Killing an enemy heals you by 1% of your max HP
 		BerserkerGlove.Tooltip: Taking damage briefly increases melee damage by 30%
 		FastClock.Tooltip: Killing an enemy briefly increases your speed
@@ -468,6 +472,7 @@ Tooltips: {
 			'''
 		ReconScope.Tooltip: 30% increased damage when no enemies are nearby
 		StalkersQuiver.Tooltip: Arrow attacks cause spectral arrows to attack the target
+		PygmyNecklace.Tooltip: Increases the number of summoned minions by 1 per minion type
 
 		ChlorophyteDye: {
 			ItemName: Chlorophyte Coating
@@ -603,7 +608,7 @@ Buffs: {
 
 	CustomInfernoBuff: {
 		DisplayName: Inferno
-		Description: Mods.TerrariaCells.Buffs.CustomInfernoBuff.Description
+		Description: Nearby enemies are ignited
 	}
 }
 

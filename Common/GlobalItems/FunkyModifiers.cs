@@ -30,6 +30,7 @@ public enum FunkyModifierType
     ImbuedDamage,
     FrenzyFire,
     DamageOnDebuff,
+    ExtraAmmo,
     CustomAmmoBullet,
     CustomAmmoArrow,
     CustomAmmoRocket,
@@ -82,6 +83,7 @@ public partial class FunkyModifierItemModifier : GlobalItem
     [
         FunkyModifier.Damage(1.15f),
         FunkyModifier.Damage(1.30f),
+        FunkyModifier.Size(1.20f),
         FunkyModifier.ProjectileVelocity(1.50f),
         FunkyModifier.AttackSpeed(1.15f),
         FunkyModifier.AttackSpeed(1.25f),
@@ -90,6 +92,7 @@ public partial class FunkyModifierItemModifier : GlobalItem
         // FunkyModifier.FrenzyFire(1.40f, 0.75f),
         FunkyModifier.DamageOnDebuff(1.50f, BuffID.OnFire),
         FunkyModifier.DamageOnDebuff(1.50f, BuffID.Poisoned),
+        FunkyModifier.ExtraAmmo(1.50f),
         FunkyModifier.CustomBulletAmmo(ProjectileID.ExplosiveBullet, ItemID.ExplodingBullet),
         FunkyModifier.CustomBulletAmmo(ProjectileID.BulletHighVelocity, ItemID.HighVelocityBullet),
         FunkyModifier.ApplyDebuff(BuffID.Poisoned, 30f),
@@ -112,11 +115,12 @@ public partial class FunkyModifierItemModifier : GlobalItem
             FunkyModifierType.Damage => [ModCategory.Generic],
             FunkyModifierType.ProjectileVelocity => [ModCategory.Projectile],
             FunkyModifierType.AttackSpeed => [ModCategory.Generic],
-            FunkyModifierType.Size => [ModCategory.Sword, ModCategory.Projectile],
+            FunkyModifierType.Size => [ModCategory.Sword],
             FunkyModifierType.ManaCost => [ModCategory.Mana],
             FunkyModifierType.ImbuedDamage => [ModCategory.Mana],
             FunkyModifierType.FrenzyFire => [ModCategory.Generic],
             FunkyModifierType.DamageOnDebuff => [ModCategory.Sword, ModCategory.Projectile],
+            FunkyModifierType.ExtraAmmo => [ModCategory.AmmoBullet, ModCategory.AmmoRocket],
             FunkyModifierType.CustomAmmoBullet => [ModCategory.AmmoBullet],
             FunkyModifierType.CustomAmmoArrow => [ModCategory.AmmoArrow],
             FunkyModifierType.CustomAmmoRocket => [ModCategory.AmmoRocket],
@@ -176,6 +180,7 @@ public partial class FunkyModifierItemModifier : GlobalItem
         (ItemID.HeatRay, [ModCategory.Projectile, ModCategory.Mana]),
         (ItemID.WaterBolt, [ModCategory.Projectile, ModCategory.Mana]),
         (ItemID.EmeraldStaff, [ModCategory.Projectile, ModCategory.Mana]),
+        (ItemID.AmberStaff, [ModCategory.Projectile, ModCategory.Mana]),
         (ItemID.RubyStaff, [ModCategory.Projectile, ModCategory.Mana]),
         (ItemID.LaserRifle, [ModCategory.Projectile, ModCategory.Mana]),
         (ItemID.SharpTears, [ModCategory.Projectile, ModCategory.Mana]),
@@ -219,6 +224,7 @@ public struct FunkyModifier(FunkyModifierType type, float modifier)
                 FunkyModifierType.ImbuedDamage => "{0}% damage, {1}% mana cost",
                 FunkyModifierType.FrenzyFire => "{0}% damage, {0}% attack speed",
                 FunkyModifierType.DamageOnDebuff => "{0}% damage vs targets afflicted by {2}",// {Terraria.Lang.GetBuffName(id)}";
+                FunkyModifierType.ExtraAmmo => "{0}% more ammo",
                 FunkyModifierType.CustomAmmoBullet => "Weapon fires {2}",
                     // string localizedText = Terraria.Lang.GetProjectileName(id).Value;
                     // if (id == ProjectileID.ExplosiveBullet) {
@@ -241,7 +247,7 @@ public struct FunkyModifier(FunkyModifierType type, float modifier)
     public FunkyModifierType modifierType = type;
 
     /// <summary>
-    /// used for Damage, ProjectileVelocity, AttackSpeed, Size, ManaCost, ImbuedDamage (damage), DamageOnDebuff (damage)
+    /// used for Damage, ProjectileVelocity, AttackSpeed, Size, ManaCost, ExtraAmmo, ImbuedDamage (damage), DamageOnDebuff (damage)
     /// </summary>
     public float modifier = modifier;
 
@@ -266,6 +272,9 @@ public struct FunkyModifier(FunkyModifierType type, float modifier)
 
     public static FunkyModifier AttackSpeed(float speedMod) =>
         new(FunkyModifierType.AttackSpeed, speedMod);
+    
+    public static FunkyModifier ExtraAmmo(float ammoMod) =>
+        new(FunkyModifierType.ExtraAmmo, ammoMod);
 
     /// <summary>
     /// Note for projectiles! Projectile hitboxes can only be flatly incrememnted by integers

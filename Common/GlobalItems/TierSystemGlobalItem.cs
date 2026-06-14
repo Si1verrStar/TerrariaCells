@@ -8,6 +8,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using TerrariaCells.Common.Items;
+using TerrariaCells.Content.WeaponAnimations;
 
 namespace TerrariaCells.Common.GlobalItems
 {
@@ -24,11 +25,12 @@ namespace TerrariaCells.Common.GlobalItems
 
         public override bool InstancePerEntity => true;
 
-        // Only apply item levels to weapons
+        // Only apply item levels to weapons or the inferno potion
         public override bool AppliesToEntity(Item entity, bool lateInstantiation)
         {
             return (lateInstantiation && (entity.damage > 0 || entity.shoot != ProjectileID.None))
-                || InventoryManager.GetItemCategorization(entity.type) == ItemsJson.ItemCategory.Weapons;
+                || InventoryManager.GetItemCategorization(entity.type) == ItemsJson.ItemCategory.Weapons
+                || entity.type == ItemID.InfernoPotion;
         #pragma warning enable
         }
 
